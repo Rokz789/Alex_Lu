@@ -144,11 +144,22 @@ class ControlPanel():
 control_panel = ControlPanel()
 control_panel.load_cars_from_file()
 
+
+def characteristic_search(cars, characteristic, value):
+    result = []
+    for car in cars:
+        if car.get(characteristic) == value:
+            result.append(car)
+    for i, cars in enumerate(result):
+        return f"{i + 1}. {cars['manufacturer']} {cars['model']} ({cars['car_type']})"
+
+
 while True:
     print("1. Вывести список автомобилей")
     print("2. Добавить автомобиль")
     print("3. Редактировать автомобиль")
-    print("4. Сохранить и выйти")
+    print("4. Поиск по характеристике")
+    print("5. Сохранить и выйти")
 
     choice = input("Выберите действие: ")
 
@@ -167,6 +178,63 @@ while True:
             car_index = int(input("Введите номер автомобиля для редактирования: ")) - 1
             control_panel.edit_car(car_index)
     elif choice == '4':
+        print('Введите номер характеристики для поиска:')
+        print('1. Производитель')
+        print('2. Модель')
+        print('3. Вид машины')
+        print('4. Номер машины')
+        print('5. Цвет машины')
+        print('6. Наличие ДТП')
+        characteristic = None
+        choice = int(input())
+        if choice == 1:
+            characteristic = 'manufacturer'
+            print('введите значение характеристики')
+            value = str(input())
+            print('найденные машины:')
+            found_cars = characteristic_search(cars, characteristic, value)
+            print(found_cars)
+        elif choice == 2:
+            characteristic = 'model'
+            print('введите значение характеристики')
+            value = str(input())
+            print('найденные машины:')
+            found_cars = characteristic_search(cars, characteristic, value)
+            print(found_cars)
+        elif choice == 3:
+            characteristic = 'car_type'
+            print('введите значение характеристики')
+            value = str(input())
+            print('найденные машины:')
+            found_cars = characteristic_search(cars, characteristic, value)
+            print(found_cars)
+        elif choice == 4:
+            characteristic = 'number'
+            print('введите значение характеристики')
+            value = str(input())
+            print('найденные машины:')
+            found_cars = characteristic_search(cars, characteristic, value)
+            print(found_cars)
+        elif choice == 5:
+            characteristic = 'color'
+            print('введите значение характеристики')
+            value = str(input())
+            print('найденные машины:')
+            found_cars = characteristic_search(cars, characteristic, value)
+            print(found_cars)
+        elif choice == 6:
+            characteristic = 'dtp'
+            print('введите значение характеристики')
+            value = str(input())
+            print('найденные машины:')
+            found_cars = characteristic_search(cars, characteristic, value)
+            print(found_cars)
+        else:
+            print('Неверное значение!')
+        break
+    elif choice == '5':
         control_panel.save_cars_to_file()
         print("Информация об автомобилях сохранена.")
         break
+
+
